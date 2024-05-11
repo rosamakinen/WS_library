@@ -4,8 +4,12 @@
 from library import library
 
 def main():
-    array_of_records = ["record", "record1", "record2", "record3", "record4", "record5"]
-    batches = library(array_of_records)
+    records = []
+    for i in range (20):
+        record = f"record{i}"
+        records.append(record)
+    print(records)
+    batches = library(records)
     print(batches)
 
 if __name__ == "__main__":
