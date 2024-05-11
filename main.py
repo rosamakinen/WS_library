@@ -5,11 +5,14 @@ from library import library
 
 def main():
     records = []
-    for i in range (20):
-        record = f"record{i}"
+    for i in range (501):
+        record = f"rec{i}"
         records.append(record)
     print(records)
-    batches = library(records)
+    try:
+        batches = library(records)
+    except ValueError:
+        print("something went wrong")
     print(batches)
 
 if __name__ == "__main__":
