@@ -42,7 +42,6 @@ class TestLibrary(unittest.TestCase):
             record = f"rec{i}"
             records.append(record)
         result = my_library.library(records)
-
         self.assertEqual(len(result), 2, "output size incorrect")
         self.assertEqual(len(result[0]), 500, "batch size incorrect")
         self.assertEqual(len(result[1]), 5, "batch size incorrect")
@@ -72,7 +71,6 @@ class TestLibrary(unittest.TestCase):
             records.append(res)
             records.append(res)
         result = my_library.library(records)
-
         self.assertEqual(len(result[0]), 500, "batch size incorrect")
         self.assertEqual(len(result[1]), 500, "batch size incorrect")
         self.assertEqual(len(result[2]), 500, "batch size incorrect")
@@ -85,7 +83,6 @@ class TestLibrary(unittest.TestCase):
         records = [under_mb_string, under_mb_string, under_mb_string, \
                    under_mb_string, under_mb_string, under_mb_string]
         result = my_library.library(records)
-
         self.assertEqual(len(result[0]), 5, "batch size incorrect")
         self.assertEqual(len(result), 2, "output size incorrect")
 

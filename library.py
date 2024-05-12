@@ -45,7 +45,6 @@ class Library:
                 batch_size = batch_size + record_size
             else:
                 self._discarded_records.append(record)
-                continue
 
         if batch:
             batches.append(batch)
