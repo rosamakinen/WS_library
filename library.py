@@ -2,7 +2,7 @@
 # pylint: disable=missing-function-docstring
 # pylint: disable=missing-class-docstring
 
-from utils import convert_mb_to_bytes
+from utils import convert_mb_to_bytes, convert_to_utf8_len
 
 class Library:
     def __init__(self, max_record_size=1, max_batch_size=5, max_records_per_batch=500):
@@ -34,7 +34,7 @@ class Library:
         batches = []
 
         for record in records:
-            record_size = len(record.encode('utf-8'))
+            record_size = convert_to_utf8_len(record)
             if  batch_size + record_size > self._max_batch_size_bytes \
                 or len(batch) + 1 > self.max_records_per_batch:
                 batches.append(batch)
