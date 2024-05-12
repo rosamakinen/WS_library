@@ -1,16 +1,16 @@
 # pylint: disable=missing-module-docstring
 # pylint: disable=missing-function-docstring
 
-from library import library
+from library import Library
 
 def main():
+    my_library = Library()
     records = []
     for i in range (501):
         record = f"rec{i}"
         records.append(record)
-    print(records)
     try:
-        batches = library(records)
+        batches = my_library.library(records)
     except ValueError:
         print("something went wrong")
     print(batches)
