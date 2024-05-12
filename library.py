@@ -35,7 +35,8 @@ class Library:
 
         for record in records:
             record_size = len(record.encode('utf-8'))
-            if  batch_size + record_size > self._max_batch_size_bytes or len(batch) + 1 > self.max_records_per_batch:
+            if  batch_size + record_size > self._max_batch_size_bytes \
+                or len(batch) + 1 > self.max_records_per_batch:
                 batches.append(batch)
                 batch = []
                 batch_size = 0
