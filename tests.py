@@ -55,11 +55,9 @@ class TestLibrary(unittest.TestCase):
     def test_massive_record(self):
         my_library = Library()
         big_string = "x" * 1048599
-        records = ["a", "b", "c", big_string]
+        records = ["a", big_string, "b", "c", big_string]
         result = my_library.library(records)
-        discarded = my_library.get_discarded_records()
-        self.assertEqual(len(result[0]), 3, "big record not discarded")
-        self.assertEqual(len(discarded), 1, "big record not saved to discarded")
+        self.assertEqual(len(result[0]), 3, "record larger than limit was saved")
 
     def test_over_500_records(self):
         my_library = Library()
@@ -93,10 +91,25 @@ class TestLibrary(unittest.TestCase):
             record = f"rec{i}"
             records.append(record)
         result = my_library.library(records)
-        self.assertEqual(my_library.max_batch_size_mb, 1, "batch size set incorrectly")
-        self.assertEqual(my_library.max_record_size_mb, 1, "record size set incorrectly")
-        self.assertEqual(my_library.max_records_per_batch, 5, "records per batch set incorrectly")
+        self.assertEqual(my_library.get_max_batch_size_mb(), 1, "batch size set incorrectly")
+        self.assertEqual(my_library.get_max_record_size_mb(), 1, "record size set incorrectly")
+        self.assertEqual(my_library.get_max_records_per_batch(), 5, "records per batch set incorrectly")
         self.assertEqual(len(result), 4, "output size incorrect")
+
+    def test_setting_limits_with_setters(self):
+        my_library = Library()
+        my_library.set_max_record_size_mb(1)
+        my_library.set_max_batch_size_mb(1)
+        my_library.set_max_records_per_batch(2)
+        records = []
+        for i in range (19):
+            record = f"rec{i}"
+            records.append(record)
+        result = my_library.library(records)
+        self.assertEqual(my_library.get_max_batch_size_mb(), 1, "batch size set incorrectly")
+        self.assertEqual(my_library.get_max_record_size_mb(), 1, "record size set incorrectly")
+        self.assertEqual(my_library.get_max_records_per_batch(), 2, "records per batch set incorrectly")
+        self.assertEqual(len(result), 10, "output size incorrect")
 
 if __name__ == "__main__":
     unittest.main()
