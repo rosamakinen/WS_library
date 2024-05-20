@@ -6,10 +6,15 @@ import unittest
 
 from library import Library
 
+#NOTES:
 #does the abstracted assertion mean that we would always
 #want to do a specific set of tests for the result?
 #like knowing the expected size of the output array and the contents
 #we could always test the same set?
+
+#NEW IDEA, what if we had a keyword/ constant for the expected data-type
+#and then based on the data type we created either a dictionary set or
+#an array! commented out code is dumb
 
 class TestLibrary(unittest.TestCase):
     @staticmethod
