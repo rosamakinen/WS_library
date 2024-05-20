@@ -10,7 +10,7 @@ def main():
         record = f"rec{i}"
         records.append(record)
     try:
-        batches = my_library.library(records)
+        batches = my_library.process_records_to_batches(records)
     except ValueError:
         print("something went wrong")
     print(batches)
